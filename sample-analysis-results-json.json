@@ -1,0 +1,82 @@
+{
+  "attribution": {
+    "channels": {
+      "Paid Search": 0.32,
+      "Social Media": 0.26,
+      "Email": 0.18,
+      "Display": 0.14,
+      "Affiliate": 0.10
+    },
+    "baseline_period": {
+      "Paid Search": 0.28,
+      "Social Media": 0.24,
+      "Email": 0.22,
+      "Display": 0.16,
+      "Affiliate": 0.10
+    },
+    "time_period": "Q2 2024",
+    "baseline_period_name": "Q1 2024"
+  },
+  "experiment_results": {
+    "metadata": {
+      "experiment_name": "Product Page Redesign",
+      "experiment_id": "EXP-2024-003",
+      "start_date": "2024-04-15",
+      "end_date": "2024-05-15"
+    },
+    "overall": {
+      "control_conversion_rate": 0.042,
+      "variant_conversion_rate": 0.051,
+      "lift": 0.214,
+      "confidence": 0.98
+    },
+    "segments": {
+      "New Visitors": {
+        "control_conversion_rate": 0.031,
+        "variant_conversion_rate": 0.042,
+        "lift": 0.355,
+        "confidence": 0.99
+      },
+      "Returning Visitors": {
+        "control_conversion_rate": 0.058,
+        "variant_conversion_rate": 0.061,
+        "lift": 0.052,
+        "confidence": 0.72
+      },
+      "Mobile Users": {
+        "control_conversion_rate": 0.038,
+        "variant_conversion_rate": 0.057,
+        "lift": 0.500,
+        "confidence": 0.99
+      },
+      "Desktop Users": {
+        "control_conversion_rate": 0.046,
+        "variant_conversion_rate": 0.048,
+        "lift": 0.043,
+        "confidence": 0.68
+      }
+    }
+  },
+  "performance_metrics": {
+    "revenue": {
+      "current_period": 1250000,
+      "previous_period": 1150000,
+      "year_over_year": 1050000
+    },
+    "conversion_rate": {
+      "current_period": 0.045,
+      "previous_period": 0.040,
+      "year_over_year": 0.037
+    },
+    "average_order_value": {
+      "current_period": 72.50,
+      "previous_period": 68.75,
+      "year_over_year": 65.25
+    },
+    "customer_acquisition_cost": {
+      "current_period": 28.50,
+      "previous_period": 30.75,
+      "year_over_year": 31.50
+    }
+  }
+}

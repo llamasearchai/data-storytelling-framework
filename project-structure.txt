@@ -1,0 +1,8 @@
+data-storyteller-agent/
+├── main.py                     # Main orchestration script
+├── storytelling_agent.py       # DataStorytellerAgent implementation
+├── mlx_analyzer.py             # MLX computation module
+├── requirements.txt            # Project dependencies
+├── README.md                   # Project documentation
+└── data/
+    └── sample_analysis_results.json  # Sample analysis results

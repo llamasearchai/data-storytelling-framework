@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ narrative.title }} | Data Story Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        header {
+            background-color: #fff;
+            padding: 1.5rem 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        h1 {
+            margin: 0;
+            color: #2c3e50;
+            font-size: 2.2rem;
+        }
+        .summary {
+            font-size: 1.2rem;
+            color: #555;
+            margin: 1rem 0;
+        }
+        .timestamp {
+            color: #777;
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 2rem;
+        }
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        .sidebar {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .card h2 {
+            margin-top: 0;
+            color: #2c3e50;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 0.5rem;
+        }
+        .card h3 {
+            color: #3498db;
+            margin: 1.5rem 0 0.5rem 0;
+        }
+        .viz-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 1.5rem;
+        }
+        .viz-card {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .viz-card h3 {
+            margin-top: 0;
+            color: #2c3e50;
+            font-size: 1.2rem;
+        }
+        .viz-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        .viz-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #3498db;
+            margin: 0.5rem 0;
+        }
+        .metric-label {
+            font-size: 0.9rem;
+            color: #777;
+        }
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        .metric-card {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .insights-list {
+            padding-left: 0;
+            list-style-type: none;
+        }
+        .insight-item {
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #3498db;
+            padding-left: 1rem;
+        }
+        .insight-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+            color: #2c3e50;
+        }
+        .recommendations-list {
+            padding-left: 1.5rem;
+        }
+        .recommendation-item {
+            margin-bottom: 0.75rem;
+        }
+        .narrative-text {
+            white-space: pre-line;
+            line-height: 1.8;
+        }
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            .viz-section {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>{{ narrative.title }}</h1>
+            <p class="summary">{{ narrative.summary }}</p>
+            <p class="timestamp">Generated on {{ narrative.creation_timestamp }}</p>
+        </header>
+
+        <div class="dashboard-grid">
+            <div class="main-content">
+                <!-- Visualizations Section -->
+                <div class="card">
+                    <h2>Visualizations</h2>
+                    <div class="viz-section">
+                        {% for viz in visualizations %}
+                        <div class="viz-card">
+                            <h3>{{ viz.title }}</h3>
+                            <div class="viz-container">
+                                <img src="{{ viz.file_path }}" alt="{{ viz.title }}">
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Narrative Section -->
+                <div class="card">
+                    <h2>Full Narrative</h2>
+                    <div class="narrative-text">
+                        {{ narrative.narrative_text }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <!-- Key Metrics -->
+                <h2>Key Metrics</h2>
+                <div class="metrics-grid">
+                    {% for metric_name, metric_value in narrative.key_metrics.items() %}
+                    <div class="metric-card">
+                        <div class="metric-value">{{ metric_value }}</div>
+                        <div class="metric-label">{{ metric_name }}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Insights -->
+                <h2>Key Insights</h2>
+                <ul class="insights-list">
+                    {% for insight in narrative.insights %}
+                    <li class="insight-item">
+                        <div class="insight-title">{{ insight.title }}</div>
+                        <p>{{ insight.description }}</p>
+                    </li>
+                    {% endfor %}
+                </ul>
+
+                <!-- Recommendations -->
+                <h2>Recommendations</h2>
+                <ol class="recommendations-list">
+                    {% for recommendation in narrative.recommendations %}
+                    <li class="recommendation-item">{{ recommendation }}</li>
+                    {% endfor %}
+                </ol>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
